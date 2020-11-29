@@ -22,30 +22,20 @@
 		<input type="submit" name="submit" value="submit" />
 		<?php
 		if(isset($_POST['submit'])) {
-			$request = array(
+			$postRequest = array(
 				'x1' => $_POST['x1'],
 				'y1' => $_POST['y1'],
 				'x2' => $_POST['x2'],
 				'y2' => $_POST['y2']
 			);
-			$curl = curl_init();
 
-			curl_setopt_array($curl, array(
-			  CURLOPT_URL => 'https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final',
-			  CURLOPT_RETURNTRANSFER => true,
-			  CURLOPT_ENCODING => '',
-			  CURLOPT_MAXREDIRS => 10,
-			  CURLOPT_TIMEOUT => 0,
-			  CURLOPT_FOLLOWLOCATION => true,
-			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			  CURLOPT_CUSTOMREQUEST => 'POST',
-			  CURLOPT_POSTFIELDS => $request
-			));
+			$cURLConnection = curl_init('https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final');
+			curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
+			curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
 
-			$response = curl_exec($curl);
-
-			curl_close($curl);
-			echo $response;
+			$apiResponse = curl_exec($cURLConnection);
+			curl_close($cURLConnection);
+			echo $apiResponse;
 		}
 		?>
 	</form>
