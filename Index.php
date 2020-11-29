@@ -20,5 +20,33 @@
 		<label for="y2">y2</label><br>
 		<input type="text" id="y2" name="y2">
 		<input type="submit" name="submit" value="submit" />
+		<?php
+		if(isset($_POST['submit'])) {
+			$request = array(
+				'x1' => $_POST['x1'],
+				'y1' => $_POST['y1'],
+				'x2' => $_POST['x2'],
+				'y2' => $_POST['y2']
+			);
+			$curl = curl_init();
+
+			curl_setopt_array($curl, array(
+			  CURLOPT_URL => 'https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final',
+			  CURLOPT_RETURNTRANSFER => true,
+			  CURLOPT_ENCODING => '',
+			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_TIMEOUT => 0,
+			  CURLOPT_FOLLOWLOCATION => true,
+			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			  CURLOPT_CUSTOMREQUEST => 'POST',
+			  CURLOPT_POSTFIELDS => $request
+			));
+
+			$response = curl_exec($curl);
+
+			curl_close($curl);
+			echo $response;
+		}
+		?>
 	</form>
 </body>
