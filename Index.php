@@ -31,7 +31,7 @@
 				'Custom-Header: custom-value',
 				'Custom-Header-Two: custom-value-2'
 			];
-
+			var_dump($data);
 			// open connection
 			$ch = curl_init();
 
@@ -48,9 +48,9 @@
 			// execute
 			$result = curl_exec($ch);
 
-			echo $result;
 			// close connection
 			curl_close($ch);
+			echo $result;
 		}
 		?>
 	</form>
