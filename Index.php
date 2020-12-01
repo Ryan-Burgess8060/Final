@@ -23,7 +23,12 @@
 		<?php
 		if(isset($_POST['submit'])) {
 			$url = 'https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final';
-			$data = ['x1' => $_POST["x1"], 'y1' => $_POST["y1"], 'x2' => $_POST["x2"], 'y2' => $_POST["y2"]];
+			$data = ["{
+						'x1' : "$_POST['x1']",
+						'y1' : "$_POST['y1']",
+						'x2' : "$_POST['x2']",
+						'y2' : "$_POST['y2']"
+					}]";
 			$headers = [
 				'Accept: */*',
 				'Content-Type: application/x-www-form-urlencoded',
