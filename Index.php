@@ -23,7 +23,7 @@
 		<?php
 		if(isset($_POST['submit'])) {
 			$url = 'https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final';
-			$data = ["{
+			$data = ["square" => "{
 						'x1' : "$_POST['x1']",
 						'y1' : "$_POST['y1']",
 						'x2' : "$_POST['x2']",
