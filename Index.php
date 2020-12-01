@@ -22,27 +22,34 @@
 		<input type="submit" name="submit" value="submit" />
 		<?php
 		if(isset($_POST['submit'])) {
-			if(!empty($_POST['x1']) && !empty($_POST['y1']) && !empty($_POST['x2']) && !empty($_POST['y2'])){
-				$postRequest = array(
-					'x1' => $_POST['x1'],
-					'y1' => $_POST['y1'],
-					'x2' => $_POST['x2'],
-					'y2' => $_POST['y2']
-				);
-				
-				var_dump($postRequest);
+			$url = 'https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final';
+			$data = ['x1' => $_POST["x1"], 'y1' => $_POST["y1"], 'x2' => $_POST["x2"], 'y2' => $_POST["y2"]];
+			$headers = [
+				'Accept: */*',
+				'Content-Type: application/x-www-form-urlencoded',
+				'Custom-Header: custom-value',
+				'Custom-Header-Two: custom-value-2'
+			];
 
-				$cURLConnection = curl_init('https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final');
-				curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
-				curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+			// open connection
+			$ch = curl_init();
 
-				$apiResponse = curl_exec($cURLConnection);
-				curl_close($cURLConnection);
-				echo $apiResponse;
-			}
-			else {
-				echo "Please fill in every field.";
-			}
+			// set curl options
+			$options = [
+				CURLOPT_URL => $url,
+				CURLOPT_POST => count($data),
+				CURLOPT_POSTFIELDS => http_build_query($data),
+				CURLOPT_HTTPHEADER => $headers,
+				CURLOPT_RETURNTRANSFER => true,
+			];
+			curl_setopt_array($ch, $options);
+
+			// execute
+			$result = curl_exec($ch);
+
+			echo $result;
+			// close connection
+			curl_close($ch);
 		}
 		?>
 	</form>
