@@ -22,13 +22,9 @@
 		<input type="submit" name="submit" value="submit" />
 		<?php
 		if(isset($_POST['submit'])) {
+			//https://cloud.google.com/appengine/docs/standard/php/issue-requests#gae-url-requests-php-curl
 			$url = 'https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final';
-			$data = ["square" => "{
-						'x1' : "$_POST['x1']",
-						'y1' : "$_POST['y1']",
-						'x2' : "$_POST['x2']",
-						'y2' : "$_POST['y2']"
-					}]";
+			$data = jsencode(['x1' => $_POST["x1"], 'y1' => $_POST["y1"], 'x2' => $_POST["x2"], 'y2' => $_POST["y2"]]);
 			$headers = [
 				'Accept: */*',
 				'Content-Type: application/x-www-form-urlencoded',
