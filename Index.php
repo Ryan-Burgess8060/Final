@@ -47,7 +47,7 @@
 
 			// execute
 			$result = curl_exec($ch);
-
+			var_dump($ch)
 			// close connection
 			curl_close($ch);
 			echo $result;
