@@ -29,6 +29,8 @@
 					'x2' => $_POST['x2'],
 					'y2' => $_POST['y2']
 				);
+				
+				echo $postRequest;
 
 				$cURLConnection = curl_init('https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final');
 				curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
@@ -39,7 +41,7 @@
 				echo $apiResponse;
 			}
 			else {
-				echo "The inputs aren't being picked up";
+				echo "Please fill in every field.";
 			}
 		}
 		?>
