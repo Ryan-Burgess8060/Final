@@ -31,7 +31,7 @@
 				'Custom-Header: custom-value',
 				'Custom-Header-Two: custom-value-2'
 			];
-			var_dump($data);
+			
 			// open connection
 			$ch = curl_init();
 
@@ -44,10 +44,9 @@
 				CURLOPT_RETURNTRANSFER => true,
 			];
 			curl_setopt_array($ch, $options);
-
+			json_encode($ch);
 			// execute
 			$result = curl_exec($ch);
-			var_dump($ch);
 			// close connection
 			curl_close($ch);
 			echo $result;
