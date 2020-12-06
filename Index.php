@@ -10,7 +10,6 @@
 </head>
 <body>
 	<p>Please input 2 points for corners of a square.</p>
-	<form method="post">
 		<label for="x1">x1</label><br>
 		<input type="text" id="x1" name="x1"><br>
 		<label for="y1">y1</label><br>
@@ -19,38 +18,24 @@
 		<input type="text" id="x2" name="x2"><br>
 		<label for="y2">y2</label><br>
 		<input type="text" id="y2" name="y2"><br>
-		<input type="submit" name="submit" value="submit" />
-		<?php
-		if(isset($_POST['submit'])) {
-			//https://cloud.google.com/appengine/docs/standard/php/issue-requests#gae-url-requests-php-curl
-			$url = 'https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final';
-			$data = json_encode(['x1' => $_POST["x1"], 'y1' => $_POST["y1"], 'x2' => $_POST["x2"], 'y2' => $_POST["y2"]]);
-			$headers = [
-				'Accept: */*',
-				'Content-Type: application/x-www-form-urlencoded',
-				'Custom-Header: custom-value',
-				'Custom-Header-Two: custom-value-2'
-			];
-			
-			// open connection
-			$ch = curl_init();
-
-			// set curl options
-			$options = [
-				CURLOPT_URL => $url,
-				CURLOPT_POST => count($data),
-				CURLOPT_POSTFIELDS => http_build_query($data),
-				CURLOPT_HTTPHEADER => $headers,
-				CURLOPT_RETURNTRANSFER => true,
-			];
-			curl_setopt_array($ch, $options);
-			json_encode($ch);
-			// execute
-			$result = curl_exec($ch);
-			// close connection
-			curl_close($ch);
-			echo $result;
+		<button onclick="return calc();">Submit</button>
+		<p id="answer"></p>
+	<script>
+		function calc() {
+			console.log("hi");
+			let xval = document.getElementById('x').value;
+			let yval = document.getElementById('y').value;
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadstatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					console.log(document.getElementById('answer'));
+					document.getElementById('answer').innerHTML = "The answer is " + this.responseText;
+				}
+			};
+			xhttp.open("POST", 'https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final', true);
+			xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.send(JSON.stringify({x:xval, y:yval}));
+			console.log("bye");
 		}
-		?>
-	</form>
+	</script>
 </body>
