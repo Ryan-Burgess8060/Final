@@ -37,7 +37,9 @@
 			xhttp.open("POST", 'https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final', true);
 			xhttp.setRequestHeader("Content-type", "application/json");
 			xhttp.send(JSON.stringify({x1:xval1, y1:yval1, x2:xval2, y2:yval2}));
+			console.log(document.getElementById('answer'));
 			console.log("bye");
+			
 		}
 	</script>
 </body>
