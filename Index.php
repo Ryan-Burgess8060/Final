@@ -29,6 +29,8 @@
 			let yval2 = document.getElementById('y2').value;
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadstatechange = function() {
+				console.log('plong')
+				console.log(this.readystate)
 				if (this.readyState == 4 && this.status == 200) {
 					console.log(document.getElementById('answer'));
 					document.getElementById('answer').innerHTML = "The answer is " + this.responseText;
