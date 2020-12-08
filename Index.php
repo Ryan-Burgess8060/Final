@@ -30,15 +30,13 @@
 			let yval2 = document.getElementById('y2').value;
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadstatechange = function() {
-				console.log('plong')
-				console.log(this.readystate)
 				if (this.readyState == 4 && this.status == 200) {
 					console.log(document.getElementById('answer'));
 					document.getElementById('answer').innerHTML = "The answer is " + this.responseText;
 				}
 			};
 			xhttp.open("POST", 'https://us-east1-capable-arbor-286903.cloudfunctions.net/function-final', true);
-			xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.setRequestHeader("Content-Type", "application/json");
 			xhttp.send(JSON.stringify({x1:xval1, y1:yval1, x2:xval2, y2:yval2}));
 			console.log("bye");
 		}
