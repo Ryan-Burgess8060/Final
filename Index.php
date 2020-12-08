@@ -21,6 +21,7 @@
 		<button onclick="return calc();">Submit</button>
 		<p id="answer"></p>
 	<script>
+		//function taken from professor Thackston during our last in-class lecture
 		function calc() {
 			console.log("hi");
 			let xval1 = document.getElementById('x1').value;
